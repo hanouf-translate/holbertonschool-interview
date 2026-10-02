@@ -21,7 +21,7 @@ def canUnlockAll(boxes):
     key_process = [0]
 
     while key_process:
-        current_box = keys_to_process.pop()
+        current_box = key_process.pop()
         
         for key in boxes[current_box]:
 
