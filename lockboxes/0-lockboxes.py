@@ -1,5 +1,7 @@
 #!/usr/bin/python3
-
+"""
+Module to determine if all locked boxes can be opened.
+"""
 def canUnlockAll(boxes):
     """
     Determines if all boxes can be opened.
