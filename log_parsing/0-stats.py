@@ -2,8 +2,9 @@
 """Script that reads stdin line by line and computes log metrics."""
 import re
 import sys
-LOG_PATTERN = re.compile(r'^\S+ - \[[^\]]+\] "GET /projects/260 HTTP/1\.1" (\d+) (\d+)$')
-VALID_STATUS_CODES = {"200", "301", "400", "401", "403", "404", "405", "500"}
+LOG_PATTERN = re.compile(
+    r'^\S+ - \[[^\]]+\] "GET /projects/260 HTTP/1\.1" (\d+) (\d+)$'
+)VALID_STATUS_CODES = {"200", "301", "400", "401", "403", "404", "405", "500"}
 
 def print_stats(total_size, status_counts):
     """Prints the total accumulated file size and non-zero status code counts."""
@@ -27,11 +28,9 @@ def main():
 
             status_code, file_size = match.groups()
 
-            
             if status_code not in VALID_STATUS_CODES:
                 continue
 
-           
             try:
                 total_size += int(file_size)
             except ValueError:
@@ -40,7 +39,6 @@ def main():
             status_counts[status_code] += 1
             line_count += 1
 
-            
             if line_count % 10 == 0:
                 print_stats(total_size, status_counts)
 
@@ -48,5 +46,8 @@ def main():
         print_stats(total_size, status_counts)
         raise
 
-    
     print_stats(total_size, status_counts)
+
+
+if __name__ == "__main__":
+    main()
