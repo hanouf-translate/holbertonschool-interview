@@ -4,7 +4,8 @@ import re
 import sys
 LOG_PATTERN = re.compile(
     r'^\S+ - \[[^\]]+\] "GET /projects/260 HTTP/1\.1" (\d+) (\d+)$'
-)VALID_STATUS_CODES = {"200", "301", "400", "401", "403", "404", "405", "500"}
+)
+VALID_STATUS_CODES = {"200", "301", "400", "401", "403", "404", "405", "500"}
 
 def print_stats(total_size, status_counts):
     """Prints the total accumulated file size and non-zero status code counts."""
