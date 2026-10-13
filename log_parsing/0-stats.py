@@ -1,5 +1,4 @@
 #!/usr/bin/python3
-"""log paring"""
 import re
 import sys
 """log paring"""
