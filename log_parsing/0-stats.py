@@ -1,7 +1,7 @@
 #!/usr/bin/python3
+"""Script that reads stdin line by line and computes log metrics."""
 import re
 import sys
-"""log paring"""
 LOG_PATTERN = re.compile(r'^\S+ - \[[^\]]+\] "GET /projects/260 HTTP/1\.1" (\d+) (\d+)$')
 VALID_STATUS_CODES = {"200", "301", "400", "401", "403", "404", "405", "500"}
 
