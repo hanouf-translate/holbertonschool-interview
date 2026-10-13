@@ -1,10 +1,7 @@
 #!/usr/bin/python3
 """Script that reads stdin line by line and computes log metrics."""
-import re
 import sys
-LOG_PATTERN = re.compile(
-    r'^\S+ - \[[^\]]+\] "GET /projects/260 HTTP/1\.1" (\d+) (\d+)$'
-)
+
 VALID_STATUS_CODES = {"200", "301", "400", "401", "403", "404", "405", "500"}
 
 def print_stats(total_size, status_counts):
@@ -21,23 +18,23 @@ def main():
 
     try:
         for line in sys.stdin:
-            line = line.strip()
-            match = LOG_PATTERN.match(line)
+            parts = line.strip().split()
 
-            if not match:
+            if len(parts) < 2:
                 continue
 
-            status_code, file_size = match.groups()
-
-            if status_code not in VALID_STATUS_CODES:
-                continue
+            file_size_str = parts[-1]
+            status_code = parts[-2]
 
             try:
-                total_size += int(file_size)
+                file_size = int(file_size_str)
             except ValueError:
                 continue
 
-            status_counts[status_code] += 1
+            if status_code in VALID_STATUS_CODES:
+                status_counts[status_code] += 1
+
+            total_size += file_size
             line_count += 1
 
             if line_count % 10 == 0:
@@ -47,7 +44,8 @@ def main():
         print_stats(total_size, status_counts)
         raise
 
-    print_stats(total_size, status_counts)
+    else:
+        print_stats(total_size, status_counts)
 
 
 if __name__ == "__main__":
