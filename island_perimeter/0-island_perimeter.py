@@ -11,17 +11,9 @@ def island_perimeter(grid):
         for j in range(grid_width):
             if grid[i][j] == 1:
                 perimeter += 4
-                # up neighbor
                 if i > 0 and grid[i - 1][j] == 1:
-                    perimeter -= 1
-                # left neighbor
+                    perimeter -= 2
                 if j > 0 and grid[i][j - 1] == 1:
-                    perimeter -= 1
-                # down neighbor
-                if i < grid_length - 1 and grid[i + 1][j] == 1:
-                    perimeter -= 1
-                # right neighbor
-                if j < grid_width - 1 and grid[i][j + 1] == 1:
-                    perimeter -= 1
+                    perimeter -= 2
 
     return perimeter
